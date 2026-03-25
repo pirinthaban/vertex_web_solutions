@@ -1,12 +1,17 @@
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { Home } from './pages/Home';
-import { HelpCenter } from './pages/HelpCenter';
-import { PrivacyPolicy } from './pages/PrivacyPolicy';
-import { TermsOfService } from './pages/TermsOfService';
-import { CookiePolicy } from './pages/CookiePolicy';
+
+const Home = lazy(async () => import('./pages/Home').then((module) => ({ default: module.Home })));
+const HelpCenter = lazy(async () => import('./pages/HelpCenter').then((module) => ({ default: module.HelpCenter })));
+const PrivacyPolicy = lazy(async () => import('./pages/PrivacyPolicy').then((module) => ({ default: module.PrivacyPolicy })));
+const TermsOfService = lazy(async () =>
+  import('./pages/TermsOfService').then((module) => ({ default: module.TermsOfService }))
+);
+const CookiePolicy = lazy(async () =>
+  import('./pages/CookiePolicy').then((module) => ({ default: module.CookiePolicy }))
+);
 
 const SEO_META = {
   '/': {
@@ -67,6 +72,16 @@ export default function App() {
       ogUrl.setAttribute('content', canonicalUrl);
     }
 
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute('content', current.title);
+    }
+
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescription) {
+      twitterDescription.setAttribute('content', current.description);
+    }
+
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) {
       canonical.setAttribute('href', canonicalUrl);
@@ -76,13 +91,15 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/help-center" element={<HelpCenter />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms-of-service" element={<TermsOfService />} />
-        <Route path="/cookie-policy" element={<CookiePolicy />} />
-      </Routes>
+      <Suspense fallback={<main className="min-h-[60vh]" aria-busy="true" />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/help-center" element={<HelpCenter />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </div>
   );

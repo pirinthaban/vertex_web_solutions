@@ -166,6 +166,8 @@ export function About() {
                 <img
                   src="https://images.unsplash.com/photo-1769740333462-9a63bfa914bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB0ZWFtJTIwbWVldGluZ3xlbnwxfHx8fDE3NzI4MDUxODN8MA&ixlib=rb-4.1.0&q=80&w=1080"
                   alt="Our Team"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-[500px] object-cover"
                 />
                 
