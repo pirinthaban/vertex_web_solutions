@@ -1,10 +1,10 @@
 {
   "name": "@figma/my-make-file",
-  "private": true,
+  "private": true, "homepage": "https://pirinthaban.github.io/vertex_web_solutions", 
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build", "predeploy": "npm run build", "deploy": "gh-pages -d dist",
+    "build": "vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"", "predeploy": "npm run build", "deploy": "gh-pages -d dist",
     "dev": "vite"
   },
   "dependencies": {
