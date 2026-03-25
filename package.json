@@ -1,10 +1,13 @@
 {
   "name": "@figma/my-make-file",
-  "private": true, "homepage": "https://pirinthaban.github.io/vertex_web_solutions", 
+  "private": true,
+  "homepage": "https://vws.systems",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"", "predeploy": "npm run build", "deploy": "gh-pages -d dist",
+    "build": "vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite"
   },
   "dependencies": {
@@ -71,6 +74,7 @@
     "@vitejs/plugin-react": "4.7.0",
     "gh-pages": "^6.3.0",
     "tailwindcss": "4.1.12",
+    "typescript": "^6.0.2",
     "vite": "6.3.5"
   },
   "peerDependencies": {
