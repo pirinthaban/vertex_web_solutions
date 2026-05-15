@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# Prevent AI scrapers from excessively hitting non-informational routes if necessary
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://vws.systems/sitemap.xml
